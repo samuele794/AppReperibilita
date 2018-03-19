@@ -1,0 +1,16 @@
+https://developers.google.com/maps/documentation/android-api/map-with-marker
+
+https://www.youtube.com/watch?v=M0bYvXlhgSI&list=PLgCYzUzKIBE-vInwQhGSdnbyJ62nixHCt&index=3
+
+
+Aggiunta della mappa nel fragment
+
+https://stackoverflow.com/questions/19353255/how-to-put-google-maps-v2-on-a-fragment-using-viewpager
+https://www.google.it/search?ei=f_mNWvuHO9GTkwWu7pz4Dg&q=create+a+map+into+fragment&oq=create+a+map+into+fra&gs_l=psy-ab.3.0.33i22i29i30k1l3.33224330.33230276.0.33231241.23.21.1.1.1.0.157.1885.17j4.21.0....0...1c.1.64.psy-ab..0.23.1887...0j0i131k1j0i67k1j0i131i67k1j0i22i30k1j0i19k1.0.Q93s4RYmi6o
+https://developers.google.com/android/reference/com/google/android/gms/maps/MapView
+https://stackoverflow.com/questions/44370162/get-location-permissions-from-user-in-android-application
+https://developers.google.com/maps/documentation/android-api/config
+
+https://www.toptal.com/android/android-developers-guide-to-google-location-services-api
+
+http://www.html.it/pag/50975/google-maps-2/
