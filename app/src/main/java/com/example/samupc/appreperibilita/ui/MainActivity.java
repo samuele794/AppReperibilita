@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements ListaImpiantiFrag
                     locationSystem.startLocationUpdates();
 
                     Button button = findViewById(R.id.porcodio);
-                    button.setVisibility(View.INVISIBLE);
+                    button.setVisibility(View.GONE);
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
                     Log.i("@TEST", "TRUE");

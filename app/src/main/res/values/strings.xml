@@ -2,7 +2,7 @@
     <string name="app_name">AppReperibilita</string>
     <string name="mappa">Map</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="buttonLocalizzazione">Start localization</string>
 
     <string name="google_maps_API_key">AIzaSyA7e06CgMy1NOJpWwhTwI5Ii2crS37ZVLU</string>
 </resources>

@@ -88,7 +88,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         mapFragment.getMapAsync(this);
 
-        Button button = view.findViewById(R.id.porcodio);
+        final Button button = view.findViewById(R.id.porcodio);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,6 +100,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     //mMap.setMyLocationEnabled(true);
 
                     //return;
+                }else{
+                    LocationSystem locationSystem = new LocationSystem(getContext(), getActivity());
+                    locationSystem.startLocation(mMap);
+                    mMap.getUiSettings().setMyLocationButtonEnabled(true);
+                    mMap.setMyLocationEnabled(true);
+                    locationSystem.startLocationUpdates();
+                    button.setVisibility(View.GONE);
                 }
             }
         });
@@ -164,7 +171,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 */
     }
 
-    @Override
+   /* @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
 
@@ -192,7 +199,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             // other 'case' lines to check for other
             // permissions this app might request
         }
-    }
+    }*/
 
 
     //location

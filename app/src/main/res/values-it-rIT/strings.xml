@@ -3,4 +3,7 @@
     <string name="app_name">Reperibilità</string>
     <string name="mappa">Mappa</string>
 
+    <string name="buttonLocalizzazione">Inizia Localizzazione</string>
+
+
 </resources>

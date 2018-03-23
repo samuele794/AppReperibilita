@@ -1,22 +1,37 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.samupc.appreperibilita.ui.MainActivityFragment.MapFragment">
+    tools:context="com.example.samupc.appreperibilita.ui.MainActivityFragment.MapFragment"
+    android:orientation="vertical"
+    >
 
-    <Button
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/porcodio"
-        />
-
-    <fragment
-        android:id="@+id/main_branch_map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.googlemap.googlemap.MapsActivity" />
-
+        android:layout_height="0dp"
+        android:layout_weight="9">
+        <fragment
+            android:id="@+id/main_branch_map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.googlemap.googlemap.MapsActivity" />
+    </LinearLayout>
 
 
-</RelativeLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/porcodio"
+            android:text="@string/buttonLocalizzazione"
+            />
+
+
+
+
+
+</LinearLayout>
