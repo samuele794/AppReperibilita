@@ -116,12 +116,6 @@ public class MainActivity extends AppCompatActivity implements ListaImpiantiFrag
 
     }
 
-    //metodi per mappa
-
-
-    public void creaMappa() {
-
-    }
 
 
     @Override
