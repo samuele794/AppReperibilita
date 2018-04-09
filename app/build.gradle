@@ -32,7 +32,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:11.8.0'
 
 
-    compile 'io.nlopez.smartlocation:library:3.3.3'
-    compile 'io.nlopez.smartlocation:rx:3.3.3'
+    implementation 'io.nlopez.smartlocation:library:3.3.3'
+    implementation 'io.nlopez.smartlocation:rx:3.3.3'
 
 }

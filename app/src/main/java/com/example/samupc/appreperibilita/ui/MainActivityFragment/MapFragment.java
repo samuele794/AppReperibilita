@@ -7,12 +7,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.samupc.appreperibilita.R;
 import com.example.samupc.appreperibilita.logic.LocationSystem;
@@ -74,9 +72,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-
-        //LocationSystem locationSystem = new LocationSystem(getContext(), getActivity());
-        //locationSystem.startLocationUpdates();
     }
 
     @Override
@@ -88,21 +83,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         mapFragment.getMapAsync(this);
 
-        final Button button = view.findViewById(R.id.porcodio);
+        final Button button = view.findViewById(R.id.buttonStartLocation);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //mMap = googleMap;
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     LocationSystem locationSystem=new LocationSystem(getContext(),getActivity());
                     locationSystem.requestPermissions();
-                    //mMap.getUiSettings().setMyLocationButtonEnabled(true);
-                    //mMap.setMyLocationEnabled(true);
-
-                    //return;
                 }else{
                     LocationSystem locationSystem = new LocationSystem(getContext(), getActivity());
-                    locationSystem.startLocation(mMap);
                     mMap.getUiSettings().setMyLocationButtonEnabled(true);
                     mMap.setMyLocationEnabled(true);
                     locationSystem.startLocationUpdates();
@@ -112,12 +101,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         });
         return view;
 
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -138,9 +121,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
 
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
+    public interface OnFragmentInteractionListener {}
 
 
     @Override
@@ -158,51 +139,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             //TODO CAMBIARE
             e.printStackTrace();
         }
-       /* if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-            mMap.getUiSettings().setMyLocationButtonEnabled(true);
-            //mMap.setMyLocationEnabled(true);
-
-            //return;
-        }
 /*        LatLng UCA = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(UCA).title("YOUR TITLE")).showInfoWindow();
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(UCA,17));
 */
     }
-
-   /* @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-
-        Log.i("@TEST", "CALLBACK");
-        switch (requestCode) {
-            case 0 : {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                    Log.i("@TEST", "TRUE");
-                    Toast.makeText(getActivity(), "Permission granted", Toast.LENGTH_SHORT).show();
-
-                } else {
-                    Log.i("@TEST", "FALSE");
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                    Toast.makeText(getActivity(), "Permission denied", Toast.LENGTH_SHORT).show();
-                }
-                return;
-            }
-
-            // other 'case' lines to check for other
-            // permissions this app might request
-        }
-    }*/
-
-
-    //location
-
 
 }

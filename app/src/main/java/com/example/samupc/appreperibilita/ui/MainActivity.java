@@ -23,6 +23,8 @@ import com.example.samupc.appreperibilita.ui.MainActivityFragment.MapFragment;
 import com.example.samupc.appreperibilita.ui.MainActivityFragment.PagerAdapter;
 import com.google.android.gms.maps.GoogleMap;
 
+import static com.example.samupc.appreperibilita.logic.LocationSystem.REQUEST_FINE_LOCATION;
+
 
 public class MainActivity extends AppCompatActivity implements ListaImpiantiFragment.OnFragmentInteractionListener, MapFragment.OnFragmentInteractionListener, SetMap {
 
@@ -47,15 +49,6 @@ public class MainActivity extends AppCompatActivity implements ListaImpiantiFrag
     @Override
     protected void onStart() {
         super.onStart();
-
-        //TODO da cancellare dopo controllo
-        /*
-        LocationSystem locationSystem = new LocationSystem(this, this);
-            do{
-                locationSystem.requestPermissions();
-            }while (locationSystem.checkPermissions());
-        */
-
 
     }
 
@@ -118,20 +111,17 @@ public class MainActivity extends AppCompatActivity implements ListaImpiantiFrag
 
 
 
-    @Override
+
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
 
-        Log.i("@TEST", "CALLBACK");
         switch (requestCode) {
-            case 0: {
+            case REQUEST_FINE_LOCATION : {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     LocationSystem locationSystem = new LocationSystem(this, this);
-                    locationSystem.checkPermissions();
-                    locationSystem.startLocation(map);
                     map.getUiSettings().setMyLocationButtonEnabled(true);
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         return;
@@ -139,18 +129,16 @@ public class MainActivity extends AppCompatActivity implements ListaImpiantiFrag
                     map.setMyLocationEnabled(true);
                     locationSystem.startLocationUpdates();
 
-                    Button button = findViewById(R.id.porcodio);
+                    Button button = findViewById(R.id.buttonStartLocation);
                     button.setVisibility(View.GONE);
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
-                    Log.i("@TEST", "TRUE");
-                    Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show();
 
                 } else {
+
                     Log.i("@TEST", "FALSE");
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
-                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
                 }
                 return;
             }

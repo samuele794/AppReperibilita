@@ -30,7 +30,7 @@ public class LocationSystem {
 
     private Context context;
     private GoogleMap mMap;
-    private static final int REQUEST_FINE_LOCATION = 0;
+    public static final int REQUEST_FINE_LOCATION = 0;
 
     private LocationRequest mLocationRequest;
     private Activity activity;
@@ -80,52 +80,12 @@ public class LocationSystem {
         // You can now create a LatLng Object for use with maps
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
     }
-
-
-    public void onMapReady(GoogleMap googleMap) {
-
-        if (checkPermissions()) {
-            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions();
-            }
-            googleMap.setMyLocationEnabled(true);
-        }
-    }
-
-    public boolean checkPermissions() {
-        if (ContextCompat.checkSelfPermission(context,
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            startLocation(mMap);
-            return true;
-        } else {
-            //requestPermissions();
-            return false;
-        }
-    }
-
     public void requestPermissions() {
 
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_FINE_LOCATION);
-        }
-    }
-
-    public void startLocation(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-
-            //do {
-            requestPermissions();
-            //}while (!checkPermissions());
-            //mMap.getUiSettings().setMyLocationButtonEnabled(true);
-            //mMap.setMyLocationEnabled(true);
-
-            //return;
         }
     }
 
