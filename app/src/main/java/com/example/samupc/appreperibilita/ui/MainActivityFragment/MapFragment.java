@@ -30,6 +30,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        LocationSystem locationSystem = new LocationSystem(getContext(), getActivity());
+        locationSystem.startLocationUpdates();
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -68,13 +76,26 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         super.onDetach();
     }
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
 
         mMap = googleMap;
 
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);
+            //mMap.setMyLocationEnabled(true);
+
+            //return;
+        }
+        /*
         SetMap setMap = null;
 
         try {
@@ -84,7 +105,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             //TODO CAMBIARE
             e.printStackTrace();
         }
-
+           */
 /*        LatLng UCA = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(UCA).title("YOUR TITLE")).showInfoWindow();
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(UCA,17));
