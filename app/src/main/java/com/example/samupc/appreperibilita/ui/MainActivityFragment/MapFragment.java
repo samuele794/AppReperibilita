@@ -3,6 +3,7 @@ package com.example.samupc.appreperibilita.ui.MainActivityFragment;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.LocationProvider;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -10,14 +11,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import com.example.samupc.appreperibilita.R;
-import com.example.samupc.appreperibilita.logic.LocationSystem;
-import com.example.samupc.appreperibilita.logic.SetMap;
+import com.example.samupc.reperibilita.Location.LocationSystem;
+import com.example.samupc.reperibilita.R;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+
+import javax.security.auth.callback.Callback;
+
 
 
 /**
@@ -71,6 +75,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        LocationSystem locationSystem = new LocationSystem(getContext(), getActivity());
+        locationSystem.startLocationUpdates();
 
     }
 
@@ -129,7 +135,21 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
 
         mMap = googleMap;
+        
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);
+            //mMap.setMyLocationEnabled(true);
 
+            //return;
+        }
+        /*
         SetMap setMap = null;
 
         try {
@@ -139,7 +159,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             //TODO CAMBIARE
             e.printStackTrace();
         }
-
+           */
 /*        LatLng UCA = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(UCA).title("YOUR TITLE")).showInfoWindow();
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(UCA,17));
