@@ -14,3 +14,6 @@ https://developers.google.com/maps/documentation/android-api/config
 https://www.toptal.com/android/android-developers-guide-to-google-location-services-api
 
 http://www.html.it/pag/50975/google-maps-2/
+
+
+https://github.com/srccodes/tool-url-expander/blob/master/src/main/java/com/srccodes/tools/misc/UrlExpander.java

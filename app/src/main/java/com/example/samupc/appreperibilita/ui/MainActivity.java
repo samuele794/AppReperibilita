@@ -3,30 +3,26 @@ package com.example.samupc.appreperibilita.ui;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
-import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.example.samupc.appreperibilita.R;
 import com.example.samupc.appreperibilita.logic.LocationSystem;
 import com.example.samupc.appreperibilita.logic.SetMap;
-import com.example.samupc.appreperibilita.ui.MainActivityFragment.ListaImpiantiFragment;
-import com.example.samupc.appreperibilita.ui.MainActivityFragment.MapFragment;
 import com.example.samupc.appreperibilita.ui.MainActivityFragment.PagerAdapter;
 import com.google.android.gms.maps.GoogleMap;
 
 import static com.example.samupc.appreperibilita.logic.LocationSystem.REQUEST_FINE_LOCATION;
 
 
-public class MainActivity extends AppCompatActivity implements ListaImpiantiFragment.OnFragmentInteractionListener, MapFragment.OnFragmentInteractionListener, SetMap {
+public class MainActivity extends AppCompatActivity implements SetMap {
 
 
     private GoogleMap map;
@@ -101,12 +97,6 @@ public class MainActivity extends AppCompatActivity implements ListaImpiantiFrag
 
             }
         });
-    }
-
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 
 
