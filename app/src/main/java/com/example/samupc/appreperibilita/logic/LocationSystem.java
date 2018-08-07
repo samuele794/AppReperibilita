@@ -3,6 +3,7 @@ package com.example.samupc.appreperibilita.logic;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Looper;
@@ -30,7 +31,8 @@ public class LocationSystem {
     private GoogleMap mMap;
     public static final int REQUEST_FINE_LOCATION = 0;
 
-    private LocationRequest mLocationRequest;
+    private static LocationRequest mLocationRequest;
+    private static LocationCallback locationCallback;
     private Activity activity;
     private long UPDATE_INTERVAL = 10 * 1000;
     private long FASTEST_INTERVAL = 2000;
@@ -42,6 +44,11 @@ public class LocationSystem {
 
 
     public void startLocationUpdates() {
+
+        Intent gpsOptionsIntent = new Intent(
+                android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        context.startActivity(gpsOptionsIntent);
+
         mLocationRequest = new LocationRequest();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setInterval(UPDATE_INTERVAL);
@@ -57,16 +64,21 @@ public class LocationSystem {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
         }
-        getFusedLocationProviderClient(context).requestLocationUpdates(mLocationRequest, new LocationCallback() {
-                    @Override
-                    public void onLocationResult(LocationResult locationResult) {
-                        // do work here
-                        onLocationChanged(locationResult.getLastLocation());
-                    }
-                },
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                // do work here
+                onLocationChanged(locationResult.getLastLocation());
+            }
+        };
+        getFusedLocationProviderClient(context).requestLocationUpdates(mLocationRequest, locationCallback,
                 Looper.myLooper());
 
 
+    }
+
+    public static void stopLocation(Context context) {
+        getFusedLocationProviderClient(context).removeLocationUpdates(locationCallback);
     }
 
     public void onLocationChanged(Location location) {

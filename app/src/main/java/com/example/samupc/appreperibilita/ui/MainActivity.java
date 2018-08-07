@@ -1,6 +1,7 @@
 package com.example.samupc.appreperibilita.ui;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -33,6 +34,16 @@ public class MainActivity extends AppCompatActivity implements SetMap {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setCustomView(R.layout.custom_toolbar);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(getApplicationContext().getDrawable(R.drawable.background_toolbar));
+        /*getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(null);
+        getSupportActionBar().setLogo(R.drawable.logo);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);*/
+
+
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.RL);  //relative layout contenente il viewpager per i fragment
@@ -45,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements SetMap {
     @Override
     protected void onStart() {
         super.onStart();
+
 
     }
 
@@ -112,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements SetMap {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     LocationSystem locationSystem = new LocationSystem(this, this);
+
                     map.getUiSettings().setMyLocationButtonEnabled(true);
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         return;
@@ -138,6 +151,11 @@ public class MainActivity extends AppCompatActivity implements SetMap {
         }
     }
 
+    @Override
+    protected void onPause() {
+        LocationSystem.stopLocation(getApplicationContext());
+        super.onPause();
+    }
 
     @Override
     public void setMap(GoogleMap map) {
